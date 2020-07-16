@@ -1,0 +1,40 @@
+{
+  "name": "shopping-cart",
+  "version": "1.0.0",
+  "description": "Discord store bot",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon --exec babel-node app.js",
+    "postinstall": "link-module-alias"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nv7z2/discord_shoppinh_cart.git"
+  },
+  "author": "Nv7z2",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Nv7z2/discord_shoppinh_cart/issues"
+  },
+  "homepage": "https://github.com/Nv7z2/discord_shoppinh_cart#readme",
+  "dependencies": {
+    "@babel/preset-env": "^7.9.6",
+    "babel-node": "0.0.1-security",
+    "babel-plugin-add-module-exports": "^1.0.2",
+    "discord.js": "^12.2.0",
+    "dotenv": "^8.2.0",
+    "mongoose": "^5.9.24",
+    "nodemon": "^2.0.4",
+    "prettier": "^2.0.5"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.6",
+    "@babel/node": "^7.8.7",
+    "link-module-alias": "^1.2.0"
+  },
+  "_moduleAliases": {
+    "~": "./",
+    "$models": "./database/models"
+  }
+}
