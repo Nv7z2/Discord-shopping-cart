@@ -14,20 +14,19 @@ export const run = (client) => {
 
     if (message.author.bot || message.channel.type === 'dm') return;
 
-    if (!await doesUserExist(message.author.id)) {
+    if (!(await doesUserExist(message.author.id))) {
+      const newUserMessage = await message.channel.send('Creating new user account...');
+
       user.create({ userID: message.author.id });
+      newUserMessage.edit('New user has been created.');
+      newUserMessage.deleteDelay(1250);
     }
 
-    if (
-      client.commands.has(commandName) &&
-      message.content.startsWith(prefix)
-    ) {
+    if (client.commands.has(commandName) && message.content.startsWith(prefix)) {
       if (args[1] === 'help') {
         // message.channel.helpEmbed(prefix, client.user.avatarURL, client.commands.get(commandName).help);
       } else {
-        client.commands
-          .get(commandName)
-          .run({ client, message, args, prefix, user, store });
+        client.commands.get(commandName).run({ client, message, args, prefix, user, store });
       }
     }
   });

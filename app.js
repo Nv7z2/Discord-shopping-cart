@@ -2,6 +2,7 @@ import { Client, Collection } from 'discord.js';
 import dotenv from 'dotenv';
 import { readdirSync } from 'fs';
 import './database';
+import './myPrototypes';
 dotenv.config();
 
 const client = new Client();

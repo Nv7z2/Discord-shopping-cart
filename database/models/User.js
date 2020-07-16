@@ -1,7 +1,7 @@
-import { Schema, model } from 'mongoose';
+import { Schema, model, Decimal128 } from 'mongoose';
 
 const UserSchema = new Schema({
-  userID: Number,
+  userID: Decimal128,
   inventory: { type: Array, default: [] },
   createdAt: { type: Date, default: Date.now },
 });
