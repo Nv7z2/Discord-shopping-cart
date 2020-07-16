@@ -2,7 +2,7 @@ import { Schema, model } from 'mongoose';
 
 const UserSchema = new Schema({
   userID: Number,
-  inventory: Array,
+  inventory: { type: Array, default: [] },
   createdAt: { type: Date, default: Date.now },
 });
 
