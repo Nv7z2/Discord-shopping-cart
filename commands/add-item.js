@@ -45,16 +45,26 @@ async function showAddingItemsError(message, prefix) {
 
 async function addItemToDatabase(message, store, itemPrice, itemName) {
   const randomItemID = Math.floor((Math.random() * Date.now()) / 50);
+  const allItems = await store.findOne({ guildID: message.guild.id });
+  const doesItemExist = await allItems.items.some((item) => item.name === itemName);
 
-  await store.updateOne(
-    { guildID: message.guild.id },
-    { $push: { items: { id: randomItemID, name: itemName, price: itemPrice } } }
-  );
+  if (doesItemExist) {
+    message.channel.embed({
+      type: 'error',
+      title: 'Error',
+      description: `**${itemName}** already exist.`,
+    });
+  } else {
+    await store.updateOne(
+      { guildID: message.guild.id },
+      { $push: { items: { id: randomItemID, name: itemName, price: itemPrice } } }
+    );
 
-  message.channel.embed({
-    type: 'success',
-    title: 'New item added',
-    description: `**${itemName}** has been added to store for **${itemPrice}$**.`,
-    footer: { text: `New item ID: ${randomItemID}` },
-  });
+    message.channel.embed({
+      type: 'success',
+      title: 'New item added',
+      description: `**${itemName}** has been added to store for **${itemPrice}$**.`,
+      footer: { text: `New item ID: ${randomItemID}` },
+    });
+  }
 }
